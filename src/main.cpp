@@ -36,10 +36,23 @@ int main(int argc, char **argv)
   sound_play::SoundClient quiet_sc;
   //sc.say("Hello world!");
   //sleep(1000);
+  sc.say("Hello world!");
+  sleepok(2, nh);
   sleepok(1, nh);
+
   
   while(nh.ok())
   {
+    sc.say("Hello world!");
+    sleepok(2, nh);
+    sc.say("Does this work?");
+    sleepok(2, nh);
+    sc.say("This took too long to fix, fucking sleepok is retarded");
+    sleepok(5, nh);
+
+  	/*
+
+  	
     sc.say("Hello world!");
     sleepok(2, nh);
     quiet_sc.say("Hello world!");
@@ -130,5 +143,7 @@ int main(int argc, char **argv)
     s8.play();
     sleepok(1, nh);
     s8.stop();
+    */
+    
   }
 }

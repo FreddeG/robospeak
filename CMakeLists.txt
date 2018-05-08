@@ -11,21 +11,12 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   sound_play
-  std_msgs
-  actionlib_msgs
-  message_generation
+  #std_msgs
+  #actionlib_msgs
+ # message_generation
 )
 
-add_message_files(FILES SoundRequest.msg)
-add_action_files(FILES SoundRequest.action)
 
-
-include_directories(include ${catkin_INCLUDE_DIRS})
-
- generate_messages(
-   DEPENDENCIES
-   actionlib_msgs
- )
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -212,4 +203,4 @@ include_directories(
 #add_dependencies(talker beginner_tutorials_generate_messages_cpp)
 add_executable(main src/main.cpp)
 target_link_libraries(main ${catkin_LIBRARIES})
-add_dependencies(main rossoundtest_generate_messages_cpp)
+#add_dependencies(main rossoundtest_generate_messages_cpp)
