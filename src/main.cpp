@@ -1,18 +1,19 @@
 #include "ros/ros.h"
 #include <std_msgs/String.h>
-//#include <sound_play/sound_play.h>
+#include <sound_play/sound_play.h>
 #include <unistd.h>
-//#include <sound_play/SoundRequest.h>
+#include <sound_play/SoundRequest.h>
 #include "rossoundtest/sayString.h"
 
-//sound_play::SoundClient sc;
+sound_play::SoundClient *ptr;
 
 bool toSay(rossoundtest::sayString::Request  &req,
          rossoundtest::sayString::Response &res)
 {
-	ROS_INFO("request: x=%s", req.str.c_str());
+	ROS_INFO("request: %s", req.str.c_str());
 	res.str.assign(req.str);
-   // sc.say(req.str.c_str());
+    ptr->say(req.str.c_str());
+    sleep(2); // should base on character length
 	return true;
 
 	/*
@@ -24,7 +25,7 @@ bool toSay(rossoundtest::sayString::Request  &req,
 }
 
 
-void sleepok(int t, ros::NodeHandle &nh)
+void sleepok(int t, ros::NodeHandle &nh) // dunno from sample code, no idea what .ok does
 {
   if (nh.ok())
       sleep(t);
@@ -35,10 +36,11 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "sound_play_test");
 
   ros::NodeHandle nh;
-  //sound_play::SoundClient sc;
-  //sleepok(2, nh);
- 
-
+  sound_play::SoundClient sc;
+  ptr = &sc;
+  sleepok(2, nh);
+  sc.say("Hello world!");
+  sleepok(2, nh);
   ros::ServiceServer service = nh.advertiseService("say_string", toSay);
   ROS_INFO("Ready to listen");
   ros::spin();
