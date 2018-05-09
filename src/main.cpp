@@ -5,26 +5,14 @@
 //#include <sound_play/SoundRequest.h>
 #include "rossoundtest/sayString.h"
 
-/* WHY NOT WORK??
-int main(int argc, char ** argv) {
-    ros::init(argc, argv, "sound_play_test");
+//sound_play::SoundClient sc;
 
-    ros::NodeHandle nh;
-    sound_play::SoundClient sc;
-
-    sc.say("test");
-
-
-    //sc.playWaveFromPkg("sound_play", "sounds/BACKINGUP.ogg");
-
-    ros::spin();
-}
-*/
 bool toSay(rossoundtest::sayString::Request  &req,
          rossoundtest::sayString::Response &res)
 {
-	ROS_INFO("request: x=%s", req.str);
-    
+	ROS_INFO("request: x=%s", req.str.c_str());
+	res.str.assign(req.str);
+   // sc.say(req.str.c_str());
 	return true;
 
 	/*
@@ -48,9 +36,10 @@ int main(int argc, char **argv)
 
   ros::NodeHandle nh;
   //sound_play::SoundClient sc;
+  //sleepok(2, nh);
  
 
-  ros::ServiceServer service = nh.advertiseService("toSay", toSay);
+  ros::ServiceServer service = nh.advertiseService("say_string", toSay);
   ROS_INFO("Ready to listen");
   ros::spin();
 

@@ -12,7 +12,6 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   sound_play
   std_msgs
-  #actionlib_msgs
   message_generation
 )
 
@@ -202,3 +201,7 @@ include_directories(
 add_executable(main src/main.cpp)
 target_link_libraries(main ${catkin_LIBRARIES})
 add_dependencies(main rossoundtest_generate_messages_cpp)
+
+add_executable(testSender.cpp src/testSender.cpp)
+target_link_libraries(testSender.cpp ${catkin_LIBRARIES})
+add_dependencies(testSender.cpp rossoundtest_generate_messages_cpp)
