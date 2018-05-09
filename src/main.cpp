@@ -3,17 +3,18 @@
 #include <sound_play/sound_play.h>
 #include <unistd.h>
 #include <sound_play/SoundRequest.h>
-#include "rossoundtest/sayString.h"
+#include "robospeak/sayString.h"
 
 sound_play::SoundClient *ptr;
 
-bool toSay(rossoundtest::sayString::Request  &req,
-         rossoundtest::sayString::Response &res)
+bool toSay(robospeak::sayString::Request  &req,
+         robospeak::sayString::Response &res)
 {
+	//should we abort if new messages arrive?
 	ROS_INFO("request: %s", req.str.c_str());
-	res.str.assign(req.str);
+	res.str.assign(req.str); // returns response, should one return after audio is played?
     ptr->say(req.str.c_str());
-    sleep(2); // should base on character length
+    sleep(2); // no idea how long this time should be
 	return true;
 
 	/*

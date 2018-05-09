@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "rossoundtest/sayString.h"
+#include "robospeak/sayString.h"
 #include <cstdlib>
 
 int main(int argc, char **argv)
@@ -7,13 +7,13 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "client");
   if (argc != 2) //put 2 for actual input
   {
-    ROS_INFO("use: rosrun rossoundtest testSender.cpp 'message'");
+    ROS_INFO("use: rosrun robospeak testSender.cpp 'message'");
     return 1;
   }
 
   ros::NodeHandle nh;
-  ros::ServiceClient client = nh.serviceClient<rossoundtest::sayString>("say_string");
-  rossoundtest::sayString srv;
+  ros::ServiceClient client = nh.serviceClient<robospeak::sayString>("say_string");
+  robospeak::sayString srv;
   srv.request.str = argv[1];
   //srv.request.str = "test";
   //ROS_INFO("Recieved argv:%s\n", argv[1]);

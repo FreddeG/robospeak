@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(rossoundtest)
+project(robospeak)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -200,8 +200,8 @@ include_directories(
 #add_dependencies(talker beginner_tutorials_generate_messages_cpp)
 add_executable(main src/main.cpp)
 target_link_libraries(main ${catkin_LIBRARIES})
-add_dependencies(main rossoundtest_generate_messages_cpp)
+add_dependencies(main robospeak_generate_messages_cpp)
 
 add_executable(testSender.cpp src/testSender.cpp)
 target_link_libraries(testSender.cpp ${catkin_LIBRARIES})
-add_dependencies(testSender.cpp rossoundtest_generate_messages_cpp)
+add_dependencies(testSender.cpp robospeak_generate_messages_cpp)
