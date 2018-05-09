@@ -1,8 +1,8 @@
 #include "ros/ros.h"
 #include <std_msgs/String.h>
-#include <sound_play/sound_play.h>
+//#include <sound_play/sound_play.h>
 #include <unistd.h>
-#include <sound_play/SoundRequest.h>
+//#include <sound_play/SoundRequest.h>
 #include "rossoundtest/sayString.h"
 
 /* WHY NOT WORK??
@@ -24,7 +24,7 @@ bool toSay(rossoundtest::sayString::Request  &req,
          rossoundtest::sayString::Response &res)
 {
 	ROS_INFO("request: x=%s", req.str);
-
+    
 	return true;
 
 	/*
@@ -47,15 +47,14 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "sound_play_test");
 
   ros::NodeHandle nh;
-  sound_play::SoundClient sc;
-  //sc.say("Hello world!");
-  //sleep(1000);
+  //sound_play::SoundClient sc;
+ 
 
   ros::ServiceServer service = nh.advertiseService("toSay", toSay);
   ROS_INFO("Ready to listen");
   ros::spin();
 
-  
+  /*
   while(nh.ok())
   {
     sc.say("Hello world!");
@@ -66,7 +65,7 @@ int main(int argc, char **argv)
     sleepok(5, nh);
     //sc.say(argv[2]);
     sleepok(5, nh);
-  	/*
+  	
 
   	
     sc.say("Hello world!");
@@ -159,7 +158,8 @@ int main(int argc, char **argv)
     s8.play();
     sleepok(1, nh);
     s8.stop();
-    */
     
+   
   }
+  */
 }
