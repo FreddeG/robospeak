@@ -10,7 +10,6 @@ project(robospeak)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  sound_play
   std_msgs
   message_generation
 )
@@ -50,10 +49,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   toSay.msg
- )
+# add_message_files(
+#   FILES
+#   toSay.msg
+# )
 
 ## Generate services in the 'srv' folder
  add_service_files(
