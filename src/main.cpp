@@ -3,7 +3,7 @@
 #include <sound_play/sound_play.h>
 #include <unistd.h>
 #include <sound_play/SoundRequest.h>
-
+#include "rossoundtest/sayString.h"
 
 /* WHY NOT WORK??
 int main(int argc, char ** argv) {
@@ -20,6 +20,21 @@ int main(int argc, char ** argv) {
     ros::spin();
 }
 */
+bool toSay(rossoundtest::sayString::Request  &req,
+         rossoundtest::sayString::Response &res)
+{
+	ROS_INFO("request: x=%s", req.str);
+
+	return true;
+
+	/*
+  res.sum = req.a + req.b;
+  ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
+  ROS_INFO("sending back response: [%ld]", (long int)res.sum);
+  return true;
+  */
+}
+
 
 void sleepok(int t, ros::NodeHandle &nh)
 {
@@ -33,12 +48,12 @@ int main(int argc, char **argv)
 
   ros::NodeHandle nh;
   sound_play::SoundClient sc;
-  sound_play::SoundClient quiet_sc;
   //sc.say("Hello world!");
   //sleep(1000);
-  sc.say("Hello world!");
-  sleepok(2, nh);
-  sleepok(1, nh);
+
+  ros::ServiceServer service = nh.advertiseService("toSay", toSay);
+  ROS_INFO("Ready to listen");
+  ros::spin();
 
   
   while(nh.ok())
@@ -49,7 +64,8 @@ int main(int argc, char **argv)
     sleepok(2, nh);
     sc.say("This took too long to fix, fucking sleepok is retarded");
     sleepok(5, nh);
-
+    //sc.say(argv[2]);
+    sleepok(5, nh);
   	/*
 
   	
