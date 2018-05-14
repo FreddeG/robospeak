@@ -12,9 +12,9 @@ bool toSay(robospeak::sayString::Request  &req,
 {
 	//should we abort if new messages arrive?
 	ROS_INFO("request: %s", req.str.c_str());
-	res.str.assign(req.str); // returns response, should one return after audio is played?
     ptr->say(req.str.c_str());
-    sleep(2); // no idea how long this time should be
+    usleep(req.str.length()*100000); // tries to give it 0.25 seconds per character
+    res.str.assign(req.str); // returns response, should one return after audio is played?
 	return true;
 
 	/*
@@ -39,8 +39,6 @@ int main(int argc, char **argv)
   ros::NodeHandle nh;
   sound_play::SoundClient sc;
   ptr = &sc;
-  sleepok(2, nh);
-  sc.say("Hello world!");
   sleepok(2, nh);
   ros::ServiceServer service = nh.advertiseService("say_string", toSay);
   ROS_INFO("Ready to listen");
