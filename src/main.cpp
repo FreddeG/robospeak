@@ -13,7 +13,7 @@ bool toSay(robospeak::sayString::Request  &req,
 	//should we abort if new messages arrive?
 	ROS_INFO("request: %s", req.str.c_str());
     ptr->say(req.str.c_str());
-    usleep(req.str.length()*100000); // tries to give it 0.25 seconds per character
+    usleep(req.str.length()*75000); // tries to give it 0.25 seconds per character
     res.str.assign(req.str); // returns response, should one return after audio is played?
 	return true;
 
